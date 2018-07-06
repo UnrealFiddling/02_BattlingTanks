@@ -19,9 +19,26 @@ void ARealTankPlayerController::BeginPlay()
 
 }
 
+//called every frame
+void ARealTankPlayerController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	AimTowardsCrosshair();
+
+	UE_LOG(LogTemp, Warning, TEXT(" Player Controller Ticking"));
+}
+
 ATank* ARealTankPlayerController::GetControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
 }
 
+void ARealTankPlayerController::AimTowardsCrosshair()
+{
+	if (!GetControlledTank()) { return; }
 
+	//get world location if line trace through crosshair
+	//if hits the landscape
+		//tell controlled tank to aim here
+}

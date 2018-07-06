@@ -16,7 +16,12 @@ class BATTLETANK_API ARealTankPlayerController : public APlayerController
 	GENERATED_BODY()
 	
 public:
+	virtual void Tick(float DeltaTime) override;
+
 	ATank* GetControlledTank() const;
-	
+
 	virtual void BeginPlay() override;
+
+	//start moving barreal towards crosshair
+	void AimTowardsCrosshair();
 };
