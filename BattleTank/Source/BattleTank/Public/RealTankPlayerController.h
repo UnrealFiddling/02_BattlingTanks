@@ -1,5 +1,4 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -24,4 +23,8 @@ public:
 
 	//start moving barreal towards crosshair
 	void AimTowardsCrosshair();
+
+private:
+	//where the tank is aiming - using & reference to the fvector
+	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
 };

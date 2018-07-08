@@ -26,7 +26,7 @@ void ARealTankPlayerController::Tick(float DeltaTime)
 
 	AimTowardsCrosshair();
 
-	UE_LOG(LogTemp, Warning, TEXT(" Player Controller Ticking"));
+	//UE_LOG(LogTemp, Warning, TEXT(" Player Controller Ticking"));
 }
 
 ATank* ARealTankPlayerController::GetControlledTank() const
@@ -38,7 +38,22 @@ void ARealTankPlayerController::AimTowardsCrosshair()
 {
 	if (!GetControlledTank()) { return; }
 
-	//get world location if line trace through crosshair
-	//if hits the landscape
-		//tell controlled tank to aim here
+	FVector OutHitLocation;
+	if (GetSightRayHitLocation(OutHitLocation))//does raytracing
+	{
+		UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *OutHitLocation.ToString());
+		
+		//if hits the landscape		//TODO tell controlled tank to aim here
+	}
+	
+
+	
+}
+
+//get world location if line trace through crosshair
+bool ARealTankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) const
+{
+
+	OutHitLocation = FVector(1.0);
+	return true;
 }
