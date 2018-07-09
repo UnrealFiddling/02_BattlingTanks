@@ -41,19 +41,25 @@ void ARealTankPlayerController::AimTowardsCrosshair()
 	FVector OutHitLocation;
 	if (GetSightRayHitLocation(OutHitLocation))//does raytracing
 	{
-		UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *OutHitLocation.ToString());
+		//UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *OutHitLocation.ToString());
 		
 		//if hits the landscape		//TODO tell controlled tank to aim here
 	}
-	
-
 	
 }
 
 //get world location if line trace through crosshair
 bool ARealTankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) const
 {
+	//finding crosshair location
+	int32 ViewportSizeX, ViewportSizeY;
+	GetViewportSize(ViewportSizeX, ViewportSizeY);
+	auto ScreenLocation = FVector2D(ViewportSizeX * CrossHairXLocation, ViewportSizeY * CrossHairYLocation);
+	
+	//UE_LOG(LogTemp, Warning, TEXT("Screen location: %s"), *ScreenLocation.ToString());
 
+	//"de-profect" the screen position of the crosshair to a world direction
+	//Line-trace along the look direction and see what we hit - consider max range
 	OutHitLocation = FVector(1.0);
 	return true;
 }
