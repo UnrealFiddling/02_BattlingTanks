@@ -56,10 +56,27 @@ bool ARealTankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) 
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 	auto ScreenLocation = FVector2D(ViewportSizeX * CrossHairXLocation, ViewportSizeY * CrossHairYLocation);
 	
-	//UE_LOG(LogTemp, Warning, TEXT("Screen location: %s"), *ScreenLocation.ToString());
-
 	//"de-profect" the screen position of the crosshair to a world direction
-	//Line-trace along the look direction and see what we hit - consider max range
-	OutHitLocation = FVector(1.0);
+	FVector LookDirection;
+	if (GetLookDirection(ScreenLocation, LookDirection))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *LookDirection.ToString());
+	}
+
+	//line trace along look direction
+
 	return true;
+}
+
+bool ARealTankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const
+{
+	
+	FVector CameraWorldLocation; //To be discarded
+
+	return DeprojectScreenPositionToWorld(
+		ScreenLocation.X,
+		ScreenLocation.Y,
+		CameraWorldLocation,
+		LookDirection);
+	
 }
