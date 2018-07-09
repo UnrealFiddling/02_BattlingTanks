@@ -41,8 +41,9 @@ void ARealTankPlayerController::AimTowardsCrosshair()
 	FVector OutHitLocation;
 	if (GetSightRayHitLocation(OutHitLocation))//does raytracing
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Hit Location: %s"), *OutHitLocation.ToString());
+		//UE_LOG(LogTemp, Warning, TEXT("Hit Location: %s"), *OutHitLocation.ToString());
 		//if hits the landscape		//TODO tell controlled tank to aim here
+		GetControlledTank()->AimAt(OutHitLocation);
 	}
 	
 }
