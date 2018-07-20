@@ -7,7 +7,6 @@ void ARealTankPlayerController::BeginPlay()
 	Super::BeginPlay();
 
 	auto ControlledTank = GetControlledTank();
-
 	if (!ControlledTank)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("PlayerController not possessing a tank"));
@@ -16,14 +15,12 @@ void ARealTankPlayerController::BeginPlay()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("PlayerController possessing: %s"), *(ControlledTank->GetName()));
 	}
-
 }
 
 //called every frame
 void ARealTankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 	AimTowardsCrosshair();
 
 	//UE_LOG(LogTemp, Warning, TEXT(" Player Controller Ticking"));
@@ -41,7 +38,6 @@ void ARealTankPlayerController::AimTowardsCrosshair()
 	FVector OutHitLocation;
 	if (GetSightRayHitLocation(OutHitLocation))//does raytracing
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("Hit Location: %s"), *OutHitLocation.ToString());
 		//if hits the landscape		//TODO tell controlled tank to aim here
 		GetControlledTank()->AimAt(OutHitLocation);
 	}
@@ -60,8 +56,6 @@ bool ARealTankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) 
 	FVector LookDirection;
 	if (GetLookDirection(ScreenLocation, LookDirection))
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *LookDirection.ToString());
-
 		//line trace along look direction
 		GetLookVectorHitLocation(LookDirection, OutHitLocation);
 	}
